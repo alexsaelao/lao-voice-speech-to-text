@@ -1,0 +1,49 @@
+#lao-voice-extension-button {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 2147483647;
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(145deg, #977eff, #6048dd);
+  box-shadow: 0 10px 26px rgba(74, 52, 200, .4), 0 0 0 5px rgba(125, 101, 255, .1);
+  cursor: pointer;
+  transform: translateX(-50%);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+#lao-voice-extension-button:hover { transform: translateX(-50%) translateY(-3px) scale(1.04); }
+
+#lao-voice-extension-button.is-listening {
+  position: fixed;
+  background: linear-gradient(145deg, #ff806f, #d84460);
+  animation: lao-voice-pulse 1.6s ease-out infinite;
+}
+
+#lao-voice-extension-button.is-listening::after {
+  position: absolute;
+  right: 50%;
+  bottom: -22px;
+  color: #ff9a8e;
+  content: "REC";
+  font: 700 9px/1 system-ui, sans-serif;
+  letter-spacing: .16em;
+  transform: translateX(50%);
+}
+
+#lao-voice-extension-button svg { width: 22px; height: 22px; pointer-events: none; }
+
+@keyframes lao-voice-pulse {
+  0%, 100% { box-shadow: 0 10px 26px rgba(219, 64, 77, .35), 0 0 0 5px rgba(255, 96, 105, .1); }
+  50% { box-shadow: 0 10px 30px rgba(219, 64, 77, .5), 0 0 0 12px rgba(255, 96, 105, 0); }
+}
+
+@media (max-width: 600px) {
+  #lao-voice-extension-button { bottom: 18px; }
+}

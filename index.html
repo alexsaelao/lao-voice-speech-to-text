@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="lo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voice Capture</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="extension-card" aria-labelledby="page-title">
+        <header class="topbar">
+          <div class="brand-lockup">
+            <div class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none">
+                <path d="M16 7v18M11 11v10M21 11v10M6.5 14v4M25.5 14v4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div>
+              <div class="brand-name">Lao Voice</div>
+              <div class="brand-caption" data-i18n="brandSubtitle">Speech capture</div>
+            </div>
+          </div>
+          <div class="language-picker">
+            <button id="languageButton" class="language-button" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <img id="languageIcon" class="flag-icon" src="./chrome-extension/flags/lao.svg" alt="" />
+              <span id="languageLabel">ລາວ</span><span class="language-chevron">⌄</span>
+            </button>
+            <div id="languageMenu" class="language-menu" role="listbox" hidden>
+              <button type="button" role="option" data-language="lo-LA" data-label="ລາວ"><img class="flag-icon" src="./chrome-extension/flags/lao.svg" alt="" /><span>ລາວ</span></button>
+              <button type="button" role="option" data-language="th-TH" data-label="ไทย"><img class="flag-icon" src="./chrome-extension/flags/thai.svg" alt="" /><span>ไทย</span></button>
+              <button type="button" role="option" data-language="en-US" data-label="English"><img class="flag-icon" src="./chrome-extension/flags/english.svg" alt="" /><span>English</span></button>
+              <button type="button" role="option" data-language="vi-VN" data-label="Tiếng Việt"><img class="flag-icon" src="./chrome-extension/flags/vietnam.svg" alt="" /><span>Tiếng Việt</span></button>
+              <button type="button" role="option" data-language="zh-CN" data-label="中文（简体）"><img class="flag-icon" src="./chrome-extension/flags/china.svg" alt="" /><span>中文（简体）</span></button>
+            </div>
+          </div>
+        </header>
+
+        <div class="hero">
+          <div class="eyebrow"><span data-i18n="kicker">LAO SPEECH TO TEXT</span></div>
+          <h1 id="page-title"><span data-i18n="title">ປ່ຽນສຽງເປັນ</span> <span data-i18n="titleAccent">ຂໍ້ຄວາມລາວ</span></h1>
+          <p class="intro" data-i18n="intro">ກົດປຸ່ມ ແລ້ວເວົ້າໄດ້ເລີຍ.<br />ຂໍ້ຄວາມຈະປາກົດແບບສົດໆ.</p>
+        </div>
+
+        <div class="voice-stage">
+          <div class="wave-ring wave-ring-one"></div>
+          <div class="wave-ring wave-ring-two"></div>
+          <button id="micButton" class="mic-button" type="button" aria-pressed="false" aria-label="ເລີ່ມເວົ້າ">
+            <svg id="micIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 15.5a3.5 3.5 0 0 0 3.5-3.5V7a3.5 3.5 0 1 0-7 0v5a3.5 3.5 0 0 0 3.5 3.5Z" stroke="currentColor" stroke-width="1.8" />
+              <path d="M18.5 11.5v.5a6.5 6.5 0 0 1-13 0v-.5M12 18.5V22M8.5 22h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="listen-state">
+          <span id="stateIcon" class="state-icon">✦</span>
+          <span id="status" role="status" data-i18n="ready">ພ້ອມໃຊ້ງານ</span>
+          <span class="shortcut">SPACE</span>
+        </div>
+
+        <div class="transcript-panel">
+          <div class="panel-heading">
+            <span><span class="panel-dot"></span> <span data-i18n="transcript">TRANSCRIPT</span></span>
+            <div class="panel-actions">
+              <button id="copyButton" class="clear-button" type="button" aria-label="ກ໊ອບປີ້ຂໍ້ຄວາມ">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.7" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+              </button>
+              <button id="clearButton" class="clear-button" type="button" aria-label="ລ້າງຂໍ້ຄວາມ">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7l1-3h4l1 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+            </div>
+          </div>
+          <label class="sr-only" for="textInput" data-i18n="transcript">TRANSCRIPT</label>
+          <textarea id="textInput" rows="5" data-i18n-placeholder="placeholder" placeholder="ຂໍ້ຄວາມທີ່ເວົ້າຈະປາກົດຢູ່ບ່ອນນີ້..."></textarea>
+        </div>
+
+        <footer class="card-footer">
+          <span class="secure-icon">✓</span>
+          <span data-i18n="footer">ຕ້ອງໃຊ້ Chrome ຫຼື Edge ແລະອະນຸຍາດໃຊ້ໄມໂຄຣໂຟນ</span>
+        </footer>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>

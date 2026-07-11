@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Lao Voice - Speech to Text",
+  "version": "0.1.0",
+  "description": "Multilingual speech to text for any focused input.",
+  "permissions": ["activeTab", "tabs", "sidePanel", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "action": { "default_title": "Lao Voice - Speech to Text" },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "background": { "service_worker": "service-worker.js" },
+  "web_accessible_resources": [
+    { "resources": ["fonts/*"], "matches": ["<all_urls>"] }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

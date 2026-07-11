@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="lo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lao Voice - Speech to Text</title>
+    <link rel="stylesheet" href="./sidepanel.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header class="panel-header">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 7v18M11 11v10M21 11v10M6.5 14v4M25.5 14v4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg></div>
+          <div><strong>Lao Voice</strong><span data-i18n="brandSubtitle">Speech extension</span></div>
+        </div>
+        <div class="header-actions">
+          <div class="language-picker">
+            <button id="languageButton" class="language-button" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <img id="languageIcon" class="flag-icon" src="./flags/lao.svg" alt="" />
+              <span id="languageLabel">ລາວ</span><span class="language-chevron">⌄</span>
+            </button>
+            <div id="languageMenu" class="language-menu" role="listbox" hidden>
+              <button type="button" role="option" data-language="lo-LA" data-label="ລາວ">
+                <img class="flag-icon" src="./flags/lao.svg" alt="" /><span>ລາວ</span>
+              </button>
+              <button type="button" role="option" data-language="th-TH" data-label="ไทย">
+                <img class="flag-icon" src="./flags/thai.svg" alt="" /><span>ไทย</span>
+              </button>
+              <button type="button" role="option" data-language="en-US" data-label="English">
+                <img class="flag-icon" src="./flags/english.svg" alt="" /><span>English</span>
+              </button>
+              <button type="button" role="option" data-language="vi-VN" data-label="Tiếng Việt">
+                <img class="flag-icon" src="./flags/vietnam.svg" alt="" /><span>Tiếng Việt</span>
+              </button>
+              <button type="button" role="option" data-language="zh-CN" data-label="中文（简体）">
+                <img class="flag-icon" src="./flags/china.svg" alt="" /><span>中文（简体）</span>
+              </button>
+            </div>
+          </div>
+          <span class="status-dot" aria-label="ພ້ອມໃຊ້ງານ"></span>
+        </div>
+      </header>
+
+      <section class="intro">
+        <div class="kicker" data-i18n="kicker">LAO SPEECH TO TEXT</div>
+        <h1><span data-i18n="title">ເວົ້າພາສາລາວ</span> <em data-i18n="titleAccent">ໃສ່ທຸກ input</em></h1>
+        <p data-i18n="intro">ຄລິກ input ໃນໜ້າເວັບ ແລ້ວກົດໄມໂຄຣໂຟນບ່ອນນີ້</p>
+      </section>
+
+      <section class="voice-control">
+        <div class="ring ring-one"></div><div class="ring ring-two"></div>
+        <button id="micButton" type="button" aria-label="ເລີ່ມເວົ້າ">
+          <svg id="micIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 0 0 3.5-3.5V7a3.5 3.5 0 1 0-7 0v5a3.5 3.5 0 0 0 3.5 3.5Z" stroke="currentColor" stroke-width="1.8"/><path d="M18.5 11.5v.5a6.5 6.5 0 0 1-13 0v-.5M12 18.5V22M8.5 22h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </section>
+
+      <div id="status" class="status" role="status" data-i18n="ready">ພ້ອມໃຊ້ງານ</div>
+      <section class="preview-card" aria-label="ຂໍ້ຄວາມຕົວຢ່າງ">
+        <div class="preview-heading">
+          <span data-i18n="previewTitle">TEXT PREVIEW</span>
+          <div class="preview-controls"><span id="previewState" data-i18n="ready">ພ້ອມ</span>
+            <div class="preview-actions">
+              <button id="copyButton" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="copy">ກ໊ອບປີ້</span></button>
+              <button id="clearButton" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M10 11v5m4-5v5M9 4h6l1 3H8l1-3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 7 7.3 20h9.4L17.5 7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span data-i18n="clear">ລ້າງ</span></button>
+            </div>
+          </div>
+        </div>
+        <textarea id="transcriptPreview" readonly data-i18n-placeholder="previewPlaceholder" placeholder="ຂໍ້ຄວາມຈາກສຽງຈະສະແດງຢູ່ບ່ອນນີ້..."></textarea>
+      </section>
+      <label class="auto-send" for="autoSendToggle">
+        <span class="auto-send-copy"><strong data-i18n="autoTitle">ສົ່ງເຂົ້າ input ຫຼັງຢຸດເວົ້າ</strong><small data-i18n="autoDescription">ເປີດເພື່ອສົ່ງ Preview ເຂົ້າ input ອັດຕະໂນມັດ</small></span>
+        <input id="autoSendToggle" type="checkbox" />
+        <span class="switch" aria-hidden="true"><i></i></span>
+      </label>
+      <div class="shortcut"><kbd>⌥</kbd> Option / Alt <span data-i18n="shortcut">ເລີ່ມ–ຢຸດ</span></div>
+      <div class="privacy"><span>✓</span> <span data-i18n="privacy">ປິດໂໝດນີ້ເພື່ອໃຊ້ input ທີ່ເລືອກເທົ່ານັ້ນ</span></div>
+    </main>
+    <script src="./sidepanel.js"></script>
+  </body>
+</html>
